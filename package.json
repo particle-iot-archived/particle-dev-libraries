@@ -1,0 +1,32 @@
+{
+  "name": "particle-dev-libraries",
+  "main": "./lib/index.js",
+  "version": "0.1.0",
+  "description": "Libraries for Particle Dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spark/particle-dev-libraries.git"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {},
+  "readme": "# Libraries for Particle Dev\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/spark/particle-dev-libraries/issues"
+  },
+  "homepage": "https://github.com/spark/particle-dev-libraries#readme",
+  "scripts": {
+    "lint": "eslint -f unix src/**/*.js",
+    "test": "atom --test spec/"
+  },
+  "atomTestRunner": "./spec/runner.js",
+  "devDependencies": {
+    "atom-mocha-test-runner": "^0.2.2",
+    "chai": "^3.5.0",
+    "eslint": "~2.2.0",
+    "eslint-config-particle": "^1.0.1"
+  }
+}
