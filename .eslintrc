@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    "mocha"
+  ],
+  "parser": "babel-eslint",
+  "extends": "particle",
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "atom": true
+  },
+  "rules": {
+    "no-var": 2
+  }
+}

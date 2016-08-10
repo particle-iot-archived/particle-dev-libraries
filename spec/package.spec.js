@@ -1,7 +1,7 @@
 'use babel';
 
 import {expect} from 'chai';
-import {packageName} from "../lib/util/package-helper";
+import {packageName} from '../lib/util/package-helper';
 
 describe('given the package', () => {
 
@@ -16,14 +16,12 @@ describe('given the package', () => {
 	});
 
 	it('is installed', () => {
-		const workspaceElement = atom.views.getView(atom.workspace);
 		const pkgs = atom.packages.getAvailablePackageNames();
 		const name = packageName();
 		expect(pkgs).to.include(name);
 	});
 
 	it('can be loaded', () => {
-		const workspaceElement = atom.views.getView(atom.workspace);
 		return atom.packages.activatePackage(packageName());
 	});
 });

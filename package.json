@@ -9,7 +9,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": "^1.0.0"
   },
   "dependencies": {},
   "readme": "# Libraries for Particle Dev\n",
@@ -19,14 +19,16 @@
   },
   "homepage": "https://github.com/spark/particle-dev-libraries#readme",
   "scripts": {
-    "lint": "eslint -f unix src/**/*.js",
+    "lint": "eslint -f unix lib spec",
     "test": "atom --test spec/"
   },
   "atomTestRunner": "./spec/runner.js",
   "devDependencies": {
     "atom-mocha-test-runner": "^0.2.2",
+    "babel-eslint": "^6.1.2",
     "chai": "^3.5.0",
     "eslint": "~2.2.0",
-    "eslint-config-particle": "^1.0.1"
+    "eslint-config-particle": "^1.0.1",
+    "eslint-plugin-mocha": "^4.3.0"
   }
 }
