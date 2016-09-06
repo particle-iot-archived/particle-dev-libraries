@@ -13,3 +13,5 @@ describe('package-helper', () => {
 		expect(fetchPackageName(path.join(__dirname, 'fixture/package-test.json'), 'snoopy')).to.be.equal('charlie-brown');
 	});
 });
+
+
