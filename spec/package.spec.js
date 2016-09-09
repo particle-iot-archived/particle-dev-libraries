@@ -135,12 +135,36 @@ describe('given the package', () => {
 						expect(filterEditView).to.be.ok;
 					});
 
+					describe('has initially', () => {
+
+						it('no items', () => {
+							expect(selectLibrary.getItems()).to.not.be.ok;
+						});
+
+						it('no selected item', () => {
+							expect(selectLibrary.getSelectedItem()).to.not.be.ok;
+						});
+
+						it('placeholder text', () => {
+							expect(filterEditView.getModel().getPlaceholderText()).to.contain('add');
+						});
+
+						it('no loading indicators', () => {
+							expect(selectLibrary.loadingArea.is(":visible")).to.be.false;
+						});
+
+						afterEach(() => {
+							atom.commands.dispatch(filterEditView, 'core:cancel');
+						});
+					});
+
 					it('can be cancelled', () => {
 						atom.commands.dispatch(filterEditView, 'core:cancel');
 						expect(projectPropertiesExists()).to.be.false;
 					});
 
 					describe('the list initially populates without typing anything', () => {
+						// actually it doesn't, the list is initially empty
 
 						function waitForPopulate() {
 							return new Promise((fulfill, reject) => {
