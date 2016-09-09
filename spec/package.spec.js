@@ -6,6 +6,18 @@ chai.use(require('chai-as-promised'));
 
 import sinon from 'sinon';
 import {profileManager} from '../lib/index';
+import {setCommandResultPromise} from '../lib/library';
+import {copySync} from 'fs-extra';
+
+/**
+ * We have to load the library command modules dynamically or we get
+ * "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self'".
+ at /Users/mat1/dev/spark/libmgr/node_modules/lodash/lodash.js:14192:16
+ at apply (/Users/mat1/dev/spark/libmgr/node_modules/lodash/lodash.js:408:27)
+ at /Users/mat1/dev/spark/libmgr/node_modules/lodash/lodash.js:14576:16
+ at /Users/mat1/dev/spark/libmgr/node_modules/lodash/lodash.js:10123:31
+ at Function.template (/Users/mat1/dev/spark/libmgr/node_modules/lodash/lo
+ */
 
 export function buildGlobalAtom() {
 	global.atom = global.buildAtomEnvironment({configDirPath: process.env.ATOM_HOME});
@@ -20,7 +32,7 @@ export function deactivatePackage() {
 }
 
 function closeNotifications() {
-	
+	// might need this to clear the global state between test failures
 }
 
 
@@ -47,6 +59,39 @@ describe('given the package', () => {
 		delete global.atom;
 	});
 
+	function notificationsSame(n1, n2) {
+		return n1 && n2 && n1.message===n2.message && n1.type===n2.type;
+	}
+
+
+	function findNotification(expected, shouldExist=true) {
+		const notifications = atom.notifications.getNotifications();
+		if (shouldExist) {
+			expect(notifications.length).to.be.greaterThan(0, 'no notifications visible, expected at least one');
+		}
+		let matched = false;
+		for (let idx in notifications) {
+			matched = matched || notificationsSame(notifications[idx], expected);
+		}
+		return matched;
+	}
+
+	/**
+	 * Test helper that validates if the given notification exists or doesn't.
+	 * @param expected
+	 * @param shouldExist
+	 */
+	function expectNotification(expected, shouldExist=true) {
+		const matched = findNotification(expected, shouldExist);
+		if (matched!=shouldExist) {
+			console.log(notifications);
+			if (shouldExist) {
+				expect(notifications[0].message).to.be.deep.equal(expected.message);
+			} else {
+				expect(matched).to.be.equal(shouldExist, `expected notification to not exist: ${expected.message}`);
+			}
+		}
+	}
 
 	/*
 	it('is installed', () => {
@@ -56,7 +101,8 @@ describe('given the package', () => {
 	});
 	*/
 
-	it('can be loaded', () => {
+	it('can be loaded', function doit() {
+		this.timeout(5000);
 		activatePackage();
 	});
 
@@ -66,7 +112,6 @@ describe('given the package', () => {
 		const path = require('path');
 
 		let projectDir;
-		let notificationContainer;
 
 		beforeEach(() => {
 			notificationContainer = workspaceElement.querySelector('atom-notifications');
@@ -86,6 +131,8 @@ describe('given the package', () => {
 
 		describe('and a project directory is selected', () => {
 
+			let disposables = [];
+
 			beforeEach(() => {
 				projectDir = temp.mkdirSync();
 				atom.project.setPaths([projectDir]);
@@ -93,24 +140,81 @@ describe('given the package', () => {
 
 			afterEach(() => {
 				temp.cleanupSync();
+				setCommandResultPromise(undefined);
+
+				for (let idx in disposables) {
+					disposables[idx].dispose();
+				}
 			});
 
 			function projectPropertiesExists() {
 				return fs.existsSync(path.join(projectDir, 'project.properties'));
 			}
 
-			describe('when "particle-dev-libraries:migrate" is run', () => {
-				beforeEach(() => {
-					atom.commands.dispatch(workspaceElement, cmdPrefix+':migrate');
-				});
+			function runMigrate(then) {
+				setCommandResultPromise(then);
+				atom.commands.dispatch(workspaceElement, cmdPrefix+':migrate');
+				return then;
+			}
 
-				it('displays a message that the current project is not a v1 library', () => {
-					
+			function expectNoLibraryProjectNotificationIsShown() {
+				const libMigrateModule = require('../lib/library_migrate');
+				const expected = libMigrateModule.noLibraryProjectSelectedNotification();
+				expectNotification(expected);
+			}
+
+			describe('that is not a library', () => {
+				it('then displays an error that the current project isn\'t a library', () => {
+					return runMigrate(() => {
+						expectNoLibraryProjectNotificationIsShown();
+					});
 				});
 			});
 
+			describe('that is a v1 library', () => {
+				beforeEach(() => {
+					const resourcesDirectory = require('particle-cli-library-manager').resourcesDir;
+					copySync(path.join(resourcesDirectory(), 'libraries', 'library-v1'), projectDir);
+				});
 
-			describe('when "particle-dev-libraries:add" is run', () => {
+				describe('and particle-dev-libraries:migrate" is run', () => {
+					it('then it displays a migrating notification, migrates the library and displays a success notification', () => {
+						let count = 0;
+						const libMigrateModule = require('../lib/library_migrate');
+						function notificationExpect(notification) {
+							// only the first time
+							expectNotification(libMigrateModule.notifyLibraryMigrating(projectDir), !count++);
+						}
+
+						disposables.push(atom.notifications.onDidAddNotification(notificationExpect));
+
+						return runMigrate(() => {
+							expect(count).to.be.greaterThan(0, 'expected notifications to be added');
+							expectNotification(libMigrateModule.notifyLibraryMigrated(projectDir, true));
+							expect(fs.existsSync(path.join(projectDir, 'library.properties'))).to.be.true;
+						});
+					});
+				});
+			});
+
+			describe('that is a v2 library', () => {
+				beforeEach(() => {
+					const resourcesDirectory = require('particle-cli-library-manager').resourcesDir;
+					copySync(path.join(resourcesDirectory(), 'libraries', 'library-v2'), projectDir);
+				});
+
+				describe('and particle-dev-libraries:migrate" is run', () => {
+					it('leaves the library intact and displays a success notification', () => {
+						return runMigrate(() => {
+							const libMigrateModule = require('../lib/library_migrate');
+							expectNotification(libMigrateModule.notifyLibraryMigrated(projectDir, false));
+							expect(fs.existsSync(path.join(projectDir, 'library.properties'))).to.be.true;
+						});
+					});
+				});
+			});
+
+			describe.skip('when "particle-dev-libraries:add" is run', () => {
 
 				let clock;
 				beforeEach(() => {
@@ -150,7 +254,7 @@ describe('given the package', () => {
 						});
 
 						it('no loading indicators', () => {
-							expect(selectLibrary.loadingArea.is(":visible")).to.be.false;
+							expect(selectLibrary.loadingArea.is(':visible')).to.be.false;
 						});
 
 						afterEach(() => {
@@ -183,8 +287,7 @@ describe('given the package', () => {
 
 					});
 
-
-					it('can select a library by typing in part of the name',  function doit() {
+					it('can select a library by typing in part of the name', function doit() {
 						this.timeout(10*1000);
 						const libName = 'neopix';
 						const promise = new Promise((fulfill, reject) => {
@@ -222,12 +325,11 @@ describe('given the package', () => {
 
 			function expectNoDirectoryNotificationIsShown() {
 				const libModule = require('../lib/library');
-				const notifications = atom.notifications.getNotifications();
 				const expected = libModule.noProjectSelectedNotification();
-				expect(notifications[0].message).to.be.deep.equal(expected.message);
+				expectNotification(expected);
 			}
 
-			describe('when "particle-dev-libraries:add" is run', () => {
+			describe.skip('when "particle-dev-libraries:add" is run', () => {
 				beforeEach(() => {
 					atom.commands.dispatch(workspaceElement, cmdPrefix+':add');
 				});
