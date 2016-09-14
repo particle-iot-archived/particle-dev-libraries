@@ -26,7 +26,8 @@
     "particle-dev-views": "git://github.com/spark/particle-dev-views.git#v0.1.0",
     "particle-cli": "../particle-cli",
     "particle-cli-library-manager": "../libmgr",
-    "when": "^3.7.7"
+    "when": "^3.7.7",
+    "yeoman-generator": "^0.24.1"
   },
   "readme": "# Libraries for Particle Dev\n",
   "readmeFilename": "README.md",
