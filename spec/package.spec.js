@@ -118,7 +118,7 @@ packageTestScope((context) => {
 
 
 	it('can be loaded', function doit() {
-		this.timeout(5000);
+		this.timeout(10000);
 		activatePackage();
 	});
 

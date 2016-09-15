@@ -50,7 +50,6 @@ describe('unit tests', () => {
 				});
 			}
 
-
 			expectCommand('libraryAdd', 'add', libraryAddCommand, [atom, getProjectDir(atom)]);
 			expectCommand('libraryMigrate', 'migrate', libraryMigrateCommand, [atom, getProjectDir(atom)]);
 			expectCommand('libraryInit', 'init', libraryInitCommand, [atom, getProjectDir(atom)]);
