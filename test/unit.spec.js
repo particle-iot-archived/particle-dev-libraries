@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 import {expect} from 'chai';
 import {registerCommands, unregisterCommands} from '../lib/commands';
-import {getProjectDir} from '../lib/util/package-helper';
+import {getProjectDirectory} from '../lib/util/package-helper';
 import * as commands from '../lib/cli';
 
 
@@ -50,9 +50,9 @@ describe('unit tests', () => {
 				});
 			}
 
-			expectCommand('libraryAdd', 'add', libraryAddCommand, [atom, getProjectDir(atom)]);
-			expectCommand('libraryMigrate', 'migrate', libraryMigrateCommand, [atom, getProjectDir(atom)]);
-			expectCommand('libraryInit', 'init', libraryInitCommand, [atom, getProjectDir(atom)]);
+			expectCommand('libraryAdd', 'add', libraryAddCommand, [atom, getProjectDirectory(atom)]);
+			expectCommand('libraryMigrate', 'migrate', libraryMigrateCommand, [atom, getProjectDirectory(atom)]);
+			expectCommand('libraryInit', 'init', libraryInitCommand, [atom, getProjectDirectory(atom)]);
 
 			it('calls dispose on the disposeable when the commands are unregistered', () => {
 				unregisterCommands(atom);
