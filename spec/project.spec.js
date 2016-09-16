@@ -13,6 +13,7 @@ export function projectSelectedScope(tests, context={}) {
 				context.projectDir = temp.mkdirSync();
 				context.disposables = [];
 				atom.project.setPaths([context.projectDir]);
+				console.log('set directory to', context.projectDir);
 			});
 
 			afterEach(() => {

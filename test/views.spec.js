@@ -1,5 +1,6 @@
 import {findPanelWithClass} from '../lib/views';
 import {expect} from 'chai';
+import {removeTrailingSlash} from '../lib/views';
 
 describe('finding views', () => {
 	function buildPanel(className) {
@@ -24,5 +25,36 @@ describe('finding views', () => {
 
 	it('does not find a view when the list is empty', () => {
 		expect(findPanelWithClass([], 'abcd')).to.be.undefined;
+	});
+});
+
+
+describe('removeTrailingSlash', () => {
+
+	const data = [
+		['/a', '/a'],
+		['/a/', '/a'],
+		['/a/b/c/', '/a/b/c'],
+		['/', '/'],
+		['//', '/'],
+		['/1/2/3/html.txt', '/1/2/3/html.txt']
+	];
+
+	function back(value) {
+		return value.replace(/\//g,'\\');
+	}
+
+	data.forEach((item) => {
+		it(item[0], () => {
+			expect(removeTrailingSlash(item[0])).to.be.equal(item[1]);
+		});
+
+		const original = back(item[0]);
+		const expected = back(item[1]);
+
+		it(original, () => {
+			expect(removeTrailingSlash(original)).to.be.equal(expected);
+		});
+
 	});
 });
