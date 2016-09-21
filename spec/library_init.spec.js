@@ -6,8 +6,8 @@ import {expect} from 'chai';
 import sinon from 'sinon';
 import path from 'path';
 import {setCommandResultPromise} from '../lib/library';
-import {getProjectDirectory} from '../lib/util/package-helper';
-import {setProjectDirectory} from '../lib/util/package-helper';
+import {getProjectDirectory, setProjectDirectory} from '../lib/util/package-helper';
+import {runCommand} from './commands.spec'
 
 projectSelectedScope((context) => {
 
@@ -25,10 +25,7 @@ projectSelectedScope((context) => {
 		let after = Promise.resolve();
 
 		function runLibraryInit(then) {
-			const library = require('../lib/library');
-			library.setCommandResultPromise(then);
-			atom.commands.dispatch(context.workspaceView, context.commandPrefix + ':init');
-			return then;
+			runCommand('init', then);
 		}
 
 		beforeEach(() => {

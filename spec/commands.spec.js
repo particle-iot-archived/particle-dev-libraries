@@ -2,11 +2,24 @@
 
 import {activatePackage, deactivatePackage} from './package.spec';
 import {packageTestScope} from './package.spec';
+import {setCommandResultPromise} from '../lib/library';
+import {packageName} from '../lib/util/package-helper';
 
 
 export function closeNotifications() {
 	// might need this to clear the global state between test failures
 }
+
+
+export function runCommand(name, then) {
+	const commandPrefix = packageName();
+	if (then) {
+		setCommandResultPromise(then);
+	}
+	atom.commands.dispatch(atom.views.getView(atom.workspace), commandPrefix + ':' + name);
+	return then;
+}
+
 
 /**
  * A test scope that builds upo packageTestScope() to provide

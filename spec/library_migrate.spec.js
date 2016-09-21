@@ -1,25 +1,18 @@
 'use babel';
 
-import {setCommandResultPromise} from '../lib/library';
 import {copySync} from 'fs-extra';
 import {expect} from 'sinon';
 import {expectNotification} from './package.spec';
 import {projectSelectedScope} from './project.spec';
+import {runCommand} from './commands.spec';
 
 projectSelectedScope((context) => {
 
 	const fs = require('fs');
 	const path = require('path');
 
-	let commandPrefix;
-	beforeEach(() => {
-		commandPrefix = context.commandPrefix;
-	});
-
 	function runMigrate(then) {
-		setCommandResultPromise(then);
-		atom.commands.dispatch(context.workspaceView, commandPrefix + ':migrate');
-		return then;
+		return runCommand('migrate', then);
 	}
 
 	function expectNoLibraryProjectNotificationIsShown() {

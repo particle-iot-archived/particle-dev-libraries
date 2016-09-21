@@ -5,6 +5,7 @@ import {projectNotSelectedScope} from './project.spec';
 import {projectSelectedScope} from './project.spec';
 import {expect} from 'chai';
 import sinon from 'sinon';
+import {runCommand} from './commands.spec';
 
 projectSelectedScope((context) => {
 
@@ -19,7 +20,7 @@ projectSelectedScope((context) => {
 		let clock;
 		beforeEach(() => {
 			clock = sinon.useFakeTimers();
-			atom.commands.dispatch(context.workspaceView, context.commandPrefix+':add');
+			runCommand('add');
 		});
 
 		afterEach(() => {
@@ -84,7 +85,6 @@ projectSelectedScope((context) => {
 				beforeEach(() => {
 					return waitForPopulate();
 				});
-
 			});
 
 			it('can select a library by typing in part of the name', function doit() {
@@ -123,7 +123,7 @@ projectNotSelectedScope((context) => {
 	describe('when "particle-dev-libraries:add" is run', () => {
 
 		beforeEach(() => {
-			atom.commands.dispatch(context.workspaceView, context.commandPrefix+':add');
+			runCommand('add');
 		});
 
 		it('displays a notification that no directory is selected', () => {
@@ -133,7 +133,7 @@ projectNotSelectedScope((context) => {
 
 	describe('when "particle-dev-libraries:migrate" is run', () => {
 		beforeEach(() => {
-			atom.commands.dispatch(context.workspaceView, context.commandPrefix+':migrate');
+			runCommand('migrate');
 		});
 
 		it('displays a notification that no directory is selected', () => {

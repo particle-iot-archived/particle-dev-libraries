@@ -1,9 +1,9 @@
 'use babel';
 
 import {profileManager} from '../lib/index';
-import {packageName} from '../lib/util/package-helper';
 import chai, {expect} from 'chai';
 import {onDidSetProfileManager} from '../lib/index';
+import {packageName} from '../lib/util/package-helper';
 chai.use(require('chai-as-promised'));
 
 
@@ -70,7 +70,6 @@ export function expectNotification(expected, shouldExist=true) {
 /**
  * A describe block with before/after code that maintains scope for running package tests:
  * - workspaceView is the atom workspace view
- * - commandPrefix the registered prefix for all commands
  *
  * @param {function(context)} tests a function that instantiates the mocha tests to run.
  * @param {object} context  The context.
@@ -86,9 +85,7 @@ export function packageTestScope(tests, context={}) {
 		 */
 		beforeEach(() => {
 			buildGlobalAtom();
-
 			context.workspaceView = atom.views.getView(atom.workspace);
-			context.commandPrefix = packageName();
 			expect(context.workspaceView).to.be.ok;
 		});
 
@@ -96,7 +93,6 @@ export function packageTestScope(tests, context={}) {
 
 		afterEach(() => {
 			context.workspaceView = null;
-			context.commandPrefix = null;
 			delete global.atom;
 		});
 
