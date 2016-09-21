@@ -1,13 +1,18 @@
 'use babel';
 
-import {projectNotSelectedScope} from './project.spec';
-import {projectSelectedScope} from './project.spec';
+import {projectSelectedScope, projectNotSelectedScope} from './project.spec';
 import {expect} from 'chai';
-import sinon from 'sinon';
 import path from 'path';
-import {setCommandResultPromise} from '../lib/library';
+import fs from 'fs';
 import {getProjectDirectory, setProjectDirectory} from '../lib/util/package-helper';
 import {runCommand} from './commands.spec'
+import {expectNoDirectoryNotificationIsShown} from './project.spec';
+import temp from 'temp';
+
+
+function runLibraryInit(then) {
+	return runCommand('init', then);
+}
 
 projectSelectedScope((context) => {
 
@@ -17,16 +22,18 @@ projectSelectedScope((context) => {
 		return fs.existsSync(path.join(context.projectDir, 'library.properties'));
 	}
 
+	function expectCanSetText(editor, text, error='') {
+		editor.editorModel.setText(text);
+		expect(editor.editorModel.getText()).to.equal(text);
+		expect(editor.error).to.be.equal(error);
+	}
+
 	describe('when "particle-dev-libraries:init" is run', () => {
 		let libraryDirectory;
 		const libraryName = 'myfablib';
 		const libraryNameAlt = 'testlib';
 		const libraryNameBad = 'test bad';
 		let after = Promise.resolve();
-
-		function runLibraryInit(then) {
-			runCommand('init', then);
-		}
 
 		beforeEach(() => {
 			libraryDirectory = path.join(context.projectDir, libraryName);
@@ -69,18 +76,35 @@ projectSelectedScope((context) => {
 				expect(findLibraryInitPanel()).to.be.undefined;
 			});
 
-			it('cannot be closed while the inputs are empty', () => {
+			function pressProceed() {
 				const proceed = panel.item.proceedButton;
 				expect(proceed).to.be.ok;
 				proceed.click();
+			}
+
+			it('cannot be closed while the inputs are empty', () => {
+				pressProceed();
 				expect(findLibraryInitPanel()).to.be.deep.equal(panel);
+			});
+
+			it('displays validation errors while the inputs are empty', () => {
+				panel.item.name.value = '';
+				panel.item.version.value = '';
+				panel.item.author.value = ''; // not strictly necessary - is empty by default
+
+				pressProceed();
+				expect(findLibraryInitPanel()).to.be.deep.equal(panel);
+
+				expect(panel.item.name.error).to.not.be.equal('');
+				expect(panel.item.version.error).to.not.be.equal('');
+				expect(panel.item.author.error).to.not.be.equal('');
 			});
 
 			describe('and given valid inputs', () => {
 				const validValues = {
 					directory: '/a/b/c',
 					name: libraryName,
-					version: '0.0.1',
+					version: '0.0.3',
 					author: 'me',
 					dryRun: true
 				};
@@ -107,37 +131,127 @@ projectSelectedScope((context) => {
 						original(result);
 						expect(result).to.be.deep.equal(validValues);
 					};
-
-					panel.item.proceedButton.click();
+					pressProceed();
 				});
 			});
 
-
 			describe('which has a name field that', () => {
-				let nameEditor;
+				let editor;
 				beforeEach(() => {
-					nameEditor = panel.item.name;
-					expect(nameEditor).to.be.ok;
-					expect(nameEditor.editorModel).to.be.ok;
+					editor = panel.item.name;
+					expect(editor).to.be.ok;
+					expect(editor.editorModel).to.be.ok;
 				});
 
 				it('is initially the last component of the project directory', () => {
-					expect(nameEditor.editorModel.getText()).to.equal(libraryName);
-					expect(nameEditor.error).to.be.equal('');
+					expect(editor.editorModel.getText()).to.equal(libraryName);
+					expect(editor.error).to.be.equal('');
 				});
 
 				it('can be set to a valid library name', () => {
-					nameEditor.editorModel.setText(libraryNameAlt);
-					expect(nameEditor.editorModel.getText()).to.equal(libraryNameAlt);
-					expect(nameEditor.error).to.be.equal('');
+					expectCanSetText(editor, libraryNameAlt);
 				});
 
 				it('when set to an invalid library name produces an error message', () => {
-					nameEditor.value = libraryNameBad;
-					expect(nameEditor.value).to.equal(libraryNameBad);
-					expect(nameEditor.error).to.contain('underscores');
+					editor.value = libraryNameBad;
+					expect(editor.value).to.equal(libraryNameBad);
+					expect(editor.error).to.contain('underscores');
 				});
 			});
+
+			describe('which has a directory field that', () => {
+				let editor;
+				beforeEach(() => {
+					editor = panel.item.directory;
+					expect(editor).to.be.ok;
+					expect(editor.editorModel).to.be.ok;
+				});
+
+				it('is initially the same as the project directory', () => {
+					expect(editor.editorModel.getText()).to.equal(getProjectDirectory(atom));
+					expect(editor.error).to.be.equal('');
+				});
+
+				it('can be set to a valid directory name', () => {
+					const test = path.join(libraryDirectory, 'test');
+					expectCanSetText(editor, test);
+				});
+
+				// todo - invalid filename?
+			});
+
+
+			describe('which has a version field that', () => {
+				let editor;
+				beforeEach(() => {
+					editor = panel.item.version;
+					expect(editor).to.be.ok;
+					expect(editor.editorModel).to.be.ok;
+				});
+
+				it('is initially 0.0.1', () => {
+					expect(editor.editorModel.getText()).to.equal('0.0.1');
+					expect(editor.error).to.be.equal('');
+				});
+
+				it('can be set to a valid version', () => {
+					expectCanSetText(editor, '0.0.2');
+				});
+			});
+
+			describe('which has an author field that', () => {
+				let editor;
+				beforeEach(() => {
+					editor = panel.item.author;
+					expect(editor).to.be.ok;
+					expect(editor.editorModel).to.be.ok;
+				});
+
+				it('is initially empty', () => {
+					expect(editor.editorModel.getText()).to.equal('');
+					expect(editor.error).to.be.equal('');
+				});
+
+				it('can be set to anything', () => {
+					expectCanSetText(editor, 'Mr Big');
+				});
+			});
+
 		});
+
+
+	});
+});
+
+projectNotSelectedScope((context) => {
+
+	describe('when "particle-dev-libraries:init" is run', () => {
+		beforeEach(() => {
+			runCommand('init');
+		});
+
+		it('displays a notification that no directory is selected', () => {
+			expectNoDirectoryNotificationIsShown();
+		});
+	});
+
+
+	describe('actual library init', () => {
+		let directory;
+		beforeEach(() => {
+			directory = temp.mkdirSync();
+		});
+
+		afterEach(() => {
+			temp.cleanupSync();
+		});
+
+		it('can initialize a new library in an empty folder', () => {
+			const libSpec = { name: 'test', version: '1.2.3', directory, author: 'me' };
+			const {libraryPerformInit} = require('../lib/library_init');
+			return libraryPerformInit(atom, libSpec).then(() => {
+				//expect(fs.existsSync('library.properties')).to.be.true;
+			});
+		})
 	});
 });

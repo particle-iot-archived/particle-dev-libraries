@@ -1,6 +1,6 @@
 'use babel';
 
-import {setCommandResultPromise} from '../lib/library';
+import {setCommandResultCallback} from '../lib/library';
 import {expectNotification} from './package.spec';
 import {commandTestScope} from './commands.spec';
 import temp from 'temp';
@@ -18,7 +18,7 @@ export function projectSelectedScope(tests, context={}) {
 
 			afterEach(() => {
 				temp.cleanupSync();
-				setCommandResultPromise(undefined);
+				setCommandResultCallback(undefined);
 
 				for (let idx in context.disposables) {
 					context.disposables[idx].dispose();

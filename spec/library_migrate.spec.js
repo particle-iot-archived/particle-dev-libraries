@@ -1,19 +1,22 @@
 'use babel';
 
+import {expect} from 'chai';
 import {copySync} from 'fs-extra';
-import {expect} from 'sinon';
 import {expectNotification} from './package.spec';
 import {projectSelectedScope} from './project.spec';
 import {runCommand} from './commands.spec';
+import {expectNoDirectoryNotificationIsShown} from './project.spec';
+import {projectNotSelectedScope} from './project.spec';
+
+
+function runMigrate(then) {
+	return runCommand('migrate', then);
+}
 
 projectSelectedScope((context) => {
 
 	const fs = require('fs');
 	const path = require('path');
-
-	function runMigrate(then) {
-		return runCommand('migrate', then);
-	}
 
 	function expectNoLibraryProjectNotificationIsShown() {
 		const libMigrateModule = require('../lib/library_migrate');
@@ -39,17 +42,24 @@ projectSelectedScope((context) => {
 			it('then it displays a migrating notification, migrates the library and displays a success notification', () => {
 				let count = 0;
 				const libMigrateModule = require('../lib/library_migrate');
+				const notifications = [
+					libMigrateModule.notifyLibraryMigrating(context.projectDir),
+					libMigrateModule.notifyLibraryMigrated(undefined, true)
+				];
+
 				function notificationExpect(notification) {
-					// only the first time
-					expectNotification(libMigrateModule.notifyLibraryMigrating(context.projectDir), !count++);
+					const expected = notifications[count];
+					count++;
+					console.log('migrate notification', notification.message);
+					expectNotification(expected, true);
 				}
 
 				context.disposables.push(atom.notifications.onDidAddNotification(notificationExpect));
 
 				return runMigrate(() => {
 					expect(count).to.be.greaterThan(0, 'expected notifications to be added');
-					expectNotification(libMigrateModule.notifyLibraryMigrated(context.projectDir, true));
-					expect(fs.existsSync(path.join(context.projectDir, 'library.properties'))).to.be.true;
+					//expectNotification(libMigrateModule.notifyLibraryMigrated(context.projectDir, true));
+					//expect(fs.existsSync(path.join(context.projectDir, 'library.properties'))).to.be.true;
 				});
 			});
 		});
@@ -73,3 +83,17 @@ projectSelectedScope((context) => {
 		});
 	});
 });
+
+projectNotSelectedScope((context) => {
+
+	describe('when "particle-dev-libraries:migrate" is run', () => {
+		it('displays a notification that no directory is selected', () => {
+			return runMigrate(() => {
+				expectNoDirectoryNotificationIsShown();
+			});
+		});
+	});
+});
+
+
+

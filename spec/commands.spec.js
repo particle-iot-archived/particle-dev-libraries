@@ -2,22 +2,25 @@
 
 import {activatePackage, deactivatePackage} from './package.spec';
 import {packageTestScope} from './package.spec';
-import {setCommandResultPromise} from '../lib/library';
+import {setCommandResultCallback} from '../lib/library';
 import {packageName} from '../lib/util/package-helper';
+import {getLastRunCommandPromise} from '../lib/library';
 
 
 export function closeNotifications() {
 	// might need this to clear the global state between test failures
 }
 
-
 export function runCommand(name, then) {
 	const commandPrefix = packageName();
-	if (then) {
-		setCommandResultPromise(then);
+	if (then!==undefined) {
+		setCommandResultCallback(then);
 	}
-	atom.commands.dispatch(atom.views.getView(atom.workspace), commandPrefix + ':' + name);
-	return then;
+	const command = commandPrefix + ':' + name;
+	const workspaceView = atom.views.getView(atom.workspace);
+	console.log('running atom command', command);
+	atom.commands.dispatch(workspaceView, command);
+	return then ? getLastRunCommandPromise() : undefined;
 }
 
 

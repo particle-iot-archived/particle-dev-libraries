@@ -119,21 +119,10 @@ projectSelectedScope((context) => {
 });
 
 projectNotSelectedScope((context) => {
-
 	describe('when "particle-dev-libraries:add" is run', () => {
 
 		beforeEach(() => {
 			runCommand('add');
-		});
-
-		it('displays a notification that no directory is selected', () => {
-			expectNoDirectoryNotificationIsShown();
-		});
-	});
-
-	describe('when "particle-dev-libraries:migrate" is run', () => {
-		beforeEach(() => {
-			runCommand('migrate');
 		});
 
 		it('displays a notification that no directory is selected', () => {

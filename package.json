@@ -27,6 +27,7 @@
     "particle-cli": "../particle-cli",
     "particle-cli-library-manager": "../libmgr",
     "when": "^3.7.7",
+    "yeoman-environment": "^1.6.3",
     "yeoman-generator": "^0.24.1"
   },
   "readme": "# Libraries for Particle Dev\n",
@@ -37,7 +38,7 @@
   "homepage": "https://github.com/spark/particle-dev-libraries#readme",
   "scripts": {
     "lint": "eslint -f unix lib spec",
-    "test:integration": "atom --test spec/",
+    "test:integration": "apm test",
     "test:unit": "mocha test/ -R spec --compilers js:babel-register",
     "test:all": "npm run test:unit && npm run test:integration",
     "test": "npm run test:all"
