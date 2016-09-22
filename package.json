@@ -24,8 +24,7 @@
     "loophole": "^1.1.0",
     "particle-api-js": "../particle-api-js",
     "particle-dev-views": "git://github.com/spark/particle-dev-views.git#v0.1.0",
-    "particle-cli": "../particle-cli",
-    "particle-cli-library-manager": "../libmgr",
+    "particle-commands": "../particle-commands",
     "when": "^3.7.7",
     "yeoman-environment": "^1.6.3",
     "yeoman-generator": "^0.24.1"
