@@ -27,8 +27,8 @@ class DevLibraryDeleteCommandSite extends LibraryDeleteCommandSite {
 
 	/**
 	 * Notifies the site that the command is about to retrieve the libraries.
-	 * @param {Promise}promise   The command to retrieve the libraries.
-	 * @param {string}filter     Optional
+	 * @param {Promise} promise   The command to retrieve the libraries.
+	 * @param {string} libraryIdent     The identifier of the library/version
 	 * @return {Promise} to list libraries
 	 */
 	notifyStart(promise, libraryIdent) {
@@ -51,11 +51,13 @@ function libraryDelete(name) {
 
 projectSelectedScope((context) => {
 
+	/* unused
 	function expectNoLibraryProjectNotificationIsShown() {
 		const module = require('../lib/library_publish');
 		const expected = module.noLibraryProjectSelectedNotification();
 		expectNotification(expected);
 	}
+	*/
 
 	function expectValidationErrorNotification(msg) {
 		const module = require('../lib/library_publish');
@@ -92,7 +94,7 @@ projectSelectedScope((context) => {
 
 		describe('that is a v1 library', () => {
 			beforeEach(() => {
-				const resourcesDirectory = require('particle-cli-library-manager').resourcesDir;
+				const resourcesDirectory = require('particle-library-manager').resourcesDir;
 				copySync(path.join(resourcesDirectory(), 'libraries', 'library-v1'), context.projectDir);
 			});
 
@@ -107,7 +109,7 @@ projectSelectedScope((context) => {
 			const libraryName = 'test-library-publish';
 			let resourcesDirectory;
 			before(() => {
-				resourcesDirectory = require('particle-cli-library-manager').resourcesDir;
+				resourcesDirectory = require('particle-library-manager').resourcesDir;
 			});
 
 			it('can delete the existing library', () => {
@@ -125,7 +127,6 @@ projectSelectedScope((context) => {
 			it('cannot republish the same version of the library', () => {
 				const version = '0.0.1';
 				copySync(path.join(resourcesDirectory(), 'libraries', 'publish', 'valid', version), context.projectDir);
-				const module = require('../lib/library_publish');
 				return expect(runPublish(() => {})).to.eventually.be.rejectedWith('This version already exists. Version must be greater than 0.0.1');
 			});
 

@@ -3,9 +3,8 @@
 import {projectSelectedScope, projectNotSelectedScope} from './project.spec';
 import {expect} from 'chai';
 import path from 'path';
-import fs from 'fs';
 import {getProjectDirectory, setProjectDirectory} from '../lib/util/package-helper';
-import {runCommand} from './commands.spec'
+import {runCommand} from './commands.spec';
 import {expectNoDirectoryNotificationIsShown} from './project.spec';
 import temp from 'temp';
 
@@ -16,11 +15,13 @@ function runLibraryInit(then) {
 
 projectSelectedScope((context) => {
 
+	/* unused
 	function libraryPropertiesExists() {
 		const fs = require('fs');
 		const path = require('path');
 		return fs.existsSync(path.join(context.projectDir, 'library.properties'));
 	}
+	*/
 
 	function expectCanSetText(editor, text, error='') {
 		editor.editorModel.setText(text);
@@ -33,7 +34,6 @@ projectSelectedScope((context) => {
 		const libraryName = 'myfablib';
 		const libraryNameAlt = 'testlib';
 		const libraryNameBad = 'test bad';
-		let after = Promise.resolve();
 
 		beforeEach(() => {
 			libraryDirectory = path.join(context.projectDir, libraryName);
@@ -252,6 +252,6 @@ projectNotSelectedScope((context) => {
 			return libraryPerformInit(atom, libSpec).then(() => {
 				//expect(fs.existsSync('library.properties')).to.be.true;
 			});
-		})
+		});
 	});
 });

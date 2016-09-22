@@ -22,12 +22,9 @@
     "atom-package-deps": "^4.2.0",
     "atom-space-pen-views": "^2.2.0",
     "loophole": "^1.1.0",
-    "particle-api-js": "../particle-api-js",
     "particle-dev-views": "git://github.com/spark/particle-dev-views.git#v0.1.0",
-    "particle-commands": "../particle-commands",
-    "when": "^3.7.7",
-    "yeoman-environment": "^1.6.3",
-    "yeoman-generator": "^0.24.1"
+    "particle-commands": "0.1.3",
+    "when": "^3.7.7"
   },
   "readme": "# Libraries for Particle Dev\n",
   "readmeFilename": "README.md",
@@ -40,7 +37,12 @@
     "test:integration": "apm test",
     "test:unit": "mocha test/ -R spec --compilers js:babel-register",
     "test:all": "npm run test:unit && npm run test:integration",
-    "test": "npm run test:all"
+    "test": "npm run test:all",
+    "prepublish": "echo",
+    "preversion": "npm run lint && npm run test && npm run prepublish",
+    "version": "npm run update-changelog",
+    "update-changelog": "VERSION=`node -p -e \"require('./package.json').version\"` bash -c 'read -p \"Update CHANGELOG.md for version $VERSION and press ENTER when done.\"' && git add CHANGELOG.md"
+
   },
   "atomTestRunner": "./spec/runner.js",
   "devDependencies": {

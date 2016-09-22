@@ -34,7 +34,7 @@ projectSelectedScope((context) => {
 
 	describe('that is a v1 library', () => {
 		beforeEach(() => {
-			const resourcesDirectory = require('particle-cli-library-manager').resourcesDir;
+			const resourcesDirectory = require('particle-library-manager').resourcesDir;
 			copySync(path.join(resourcesDirectory(), 'libraries', 'library-v1'), context.projectDir);
 		});
 
@@ -67,7 +67,7 @@ projectSelectedScope((context) => {
 
 	describe('that is a v2 library', () => {
 		beforeEach(() => {
-			const resourcesDirectory = require('particle-cli-library-manager').resourcesDir;
+			const resourcesDirectory = require('particle-library-manager').resourcesDir;
 			console.log('projectDir', context.projectDir);
 			copySync(path.join(resourcesDirectory(), 'libraries', 'library-v2'), context.projectDir);
 		});

@@ -25,10 +25,10 @@ export function runCommand(name, then) {
 
 
 /**
- * A test scope that builds upo packageTestScope() to provide
- * - Activates the profiles package so that a Particle-api-js client can be created.
+ * A test scope that builds upon packageTestScope() to provide a scope for testing commands.
+ * Activates the profiles package so that a Particle-api-js client can be created.
  *
- * @param {function(context}} tests  The function factory to create the tests
+ * @param {function} tests  The function factory to create the tests
  * @param {object} context  The context for the tests.
  */
 export function commandTestScope(tests, context) {

@@ -52,7 +52,7 @@ describe('unit tests', () => {
 
 			expectCommand('libraryAdd', 'add', libraryAddCommand, [atom, getProjectDirectory(atom)]);
 			expectCommand('libraryMigrate', 'migrate', libraryMigrateCommand, [atom, getProjectDirectory(atom)]);
-			expectCommand('libraryInit', 'init', libraryInitCommand, [atom, getProjectDirectory(atom)]);
+			//expectCommand('libraryInit', 'init', libraryInitCommand, [atom, getProjectDirectory(atom)]);
 
 			it('calls dispose on the disposeable when the commands are unregistered', () => {
 				unregisterCommands(atom);
