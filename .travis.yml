@@ -1,8 +1,33 @@
-language: objective-c
-
 notifications:
   email:
     on_success: never
     on_failure: change
 
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+script:
+- mkdir ~/.atom
+- mkdir ~/.atom/packages
+- ln -s . ~/.atom/packages/particle-dev-libraries
+- 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+
+git:
+  depth: 10
+
+sudo: false
+
+os:
+  - linux
+  - osx
+
+
+addons:
+  apt:
+    packages:
+    - build-essential
+    - git
+    - libgnome-keyring-dev
+    - fakeroot
+
+branches:
+  only:
+    - master
+    - develop
