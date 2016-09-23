@@ -63,6 +63,7 @@
     "eslint-plugin-mocha": "^4.3.0",
     "fs-extra": "^0.30.0",
     "html-element": "^1.5.1",
+    "mocha": "^3.0.2",
     "proxyquire": "^1.7.10",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
