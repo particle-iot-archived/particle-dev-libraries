@@ -1,4 +1,8 @@
-The particle-dev-libraries package provides library-related commands to Particle Dev.
+# Particle Dev support for Libraries
+
+![Library add command](https://raw.githubusercontent.com/spark/particle-dev-local-compiler/master/resources/library_add.gif)
+
+This provides library-related commands to Particle Dev.
 
 These commands are supported:
 
