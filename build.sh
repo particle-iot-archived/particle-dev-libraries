@@ -4,8 +4,7 @@ mkdir spec
 cp spec.safe/runner.js spec/
 curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh > atombuild.sh
 # remove the exit command at the end
-sed -i '$ d' atombuild.sh
-source atombuild.sh
+source `grep -v -e  "exit$" atombuild.sh`  
 rm -rf spec
 mv spec.safe spec
 "${APM_SCRIPT_PATH}" install .
