@@ -101,8 +101,10 @@ projectSelectedScope((context) => {
 					selectLibrary.populateList();
 				});
 				return promise.then(() => {
-					const library = 'neopixel';
-					expect(selectLibrary.getSelectedItem()).to.be.equal(library);
+					const selected = selectLibrary.getSelectedItem();
+					expect(selected).to.have.property('name').equal('neopixel');
+					expect(selected).to.have.property('version');
+					expect(selected).to.have.property('author');
 				});
 			});
 
