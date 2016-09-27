@@ -114,11 +114,13 @@ packageTestScope((context) => {
 
 
 	it('can be loaded', function doit() {
-		this.timeout(10000);
+		this.timeout(30000);
 		activatePackage();
 	});
 
 	it('the profiles manager is provided', function doit(done) {
+		this.timeout(30000);
+
 		// the profile manager is loaded asynchronously
 		let dispose = onDidSetProfileManager(() => {
 			if (dispose) {
