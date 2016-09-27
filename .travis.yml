@@ -11,8 +11,8 @@ script:
 - curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh
 - rm -rf spec
 - mv spec.safe spec
-- "${APM_SCRIPT_PATH}" install .
-- "${APM_SCRIPT_PATH}" link .
+- ${APM_SCRIPT_PATH} install .
+- ${APM_SCRIPT_PATH} link .
 - node test
 
 git:
