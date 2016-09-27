@@ -10,6 +10,6 @@ mv spec.safe spec
 "${APM_SCRIPT_PATH}" install .
 "${APM_SCRIPT_PATH}" link .
 "${NPM_SCRIPT_PATH}" run test:unit
-"${APM_SCRIPT_PATH}" test
+"${ATOM_SCRIPT_PATH}" --test ./spec
 
 
