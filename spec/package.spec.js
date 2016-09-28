@@ -75,8 +75,8 @@ export function expectNotification(expected, shouldExist=true) {
  * @param {object} context  The context.
  */
 export function packageTestScope(tests, context={}) {
-	describe('given the package', () => {
-
+	describe('given the package', function doit() {
+		this.timeout(30*1000);
 		/**
 		 * We need this to ensure the package is loaded from the default configuration directory.
 		 * It's a bit leaky for a test, but is good enough for now.
