@@ -9,7 +9,7 @@ rm -rf spec
 mv spec.safe spec
 mkdir ~/.particle
 echo '{"name":"particle"}' > ~/.particle/profile.json
-echo $PARTICLE_CONFIG_JSON > ~/.particle/particle.config.json
+echo "$PARTICLE_CONFIG_JSON" > ~/.particle/particle.config.json
 
 "${APM_SCRIPT_PATH}" install .
 "${APM_SCRIPT_PATH}" link .
