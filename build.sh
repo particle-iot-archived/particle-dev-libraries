@@ -9,6 +9,9 @@ rm -rf spec
 mv spec.safe spec
 mkdir ~/.particle
 echo "$PARTICLE_CONFIG_JSON" > ~/.particle/particle.config.json
+echo "config json env var:"
+echo "$PARTICLE_CONFIG_JSON"
+echo "config file:"
 cat ~/.particle/particle.config.json
 
 "${APM_SCRIPT_PATH}" install particle-dev-profiles
