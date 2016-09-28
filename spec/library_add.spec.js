@@ -88,7 +88,7 @@ projectSelectedScope((context) => {
 			});
 
 			it('can select a library by typing in part of the name', function doit() {
-				this.timeout(10*1000);
+				this.timeout(30*1000);
 				const libName = 'neopix';
 				const promise = new Promise((fulfill, reject) => {
 					selectLibrary.events.on('listPopulated', () => {
