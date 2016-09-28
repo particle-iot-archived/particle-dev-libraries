@@ -8,8 +8,8 @@ source noexit.sh
 rm -rf spec
 mv spec.safe spec
 mkdir ~/.particle
-echo '{"name":"particle"}' > ~/.particle/profile.json
 echo "$PARTICLE_CONFIG_JSON" > ~/.particle/particle.config.json
+cat ~/.particle/particle.config.json
 
 "${APM_SCRIPT_PATH}" install particle-dev-profiles
 "${APM_SCRIPT_PATH}" install .
