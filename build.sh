@@ -9,7 +9,7 @@ rm -rf spec
 mv spec.safe spec
 mkdir ~/.particle
 
-echo "access token is: ${ACCESS_TOKEN}""
+echo "access token is: ${ACCESS_TOKEN}"
 echo "\{\"access_token\":\"${ACCESS_TOKEN}\"\,\"username\":\"mat+test@particle.io\"\}" > ~/.particle/particle.config.json
 echo "config:"
 cat ~/.particle.config.json
