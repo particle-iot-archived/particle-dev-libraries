@@ -9,7 +9,7 @@ rm -rf spec
 mv spec.safe spec
 mkdir ~/.particle
 
-echo "\{\"access_token\":\"${ACCESS_TOKEN}\"\,\"username\":\"mat+test@particle.io\"\}" > ~/.particle/particle.config.json
+echo "{\"access_token\":\"${ACCESS_TOKEN}\",\"username\":\"mat+test@particle.io\"}" > ~/.particle/particle.config.json
 
 "${APM_SCRIPT_PATH}" install particle-dev-profiles
 "${APM_SCRIPT_PATH}" install .
