@@ -11,6 +11,7 @@ mkdir ~/.particle
 echo '{"name":"particle"}' > ~/.particle/profile.json
 echo "$PARTICLE_CONFIG_JSON" > ~/.particle/particle.config.json
 
+"${APM_SCRIPT_PATH}" install particle-dev-profiles
 "${APM_SCRIPT_PATH}" install .
 "${APM_SCRIPT_PATH}" link .
 "${NPM_SCRIPT_PATH}" run test:unit
