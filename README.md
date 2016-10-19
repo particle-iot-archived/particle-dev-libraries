@@ -2,6 +2,8 @@
 
 ![Library add command](https://raw.githubusercontent.com/spark/particle-dev-libraries/master/resources/library_add.gif)
 
+[![Build Status](https://travis-ci.org/spark/particle-dev-libraries.svg?branch=master)](https://travis-ci.org/spark/particle-dev-libraries)
+
 This provides library-related commands to Particle Dev.
 
 These commands are supported:

@@ -20,8 +20,3 @@ addons:
     - git
     - libgnome-keyring-dev
     - fakeroot
-branches:
-  only:
-  - master
-  - develop
-  - "/^feature\\/.*$/"
