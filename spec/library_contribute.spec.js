@@ -3,52 +3,10 @@
 import path from 'path';
 import {copySync} from 'fs-extra';
 import {expect} from 'chai';
-import when from 'when';
 import {expectNotification} from './package.spec';
 import {projectSelectedScope} from './project.spec';
 import {runCommand} from './commands.spec';
-import {fetchApiClient} from '../lib/library';
-
-const {LibraryDeleteCommandSite, LibraryDeleteCommand} = require('../lib/cli');
-
-class DevLibraryDeleteCommandSite extends LibraryDeleteCommandSite {
-	constructor(apiClient, name) {
-		super();
-		this._apiClient = apiClient;
-		this.name = name;
-	}
-
-	apiClient() {
-		return this._apiClient;
-	}
-
-	libraryIdent() {
-		return this.name;
-	}
-
-	/**
-	 * Notifies the site that the command is about to retrieve the libraries.
-	 * @param {Promise} promise   The command to retrieve the libraries.
-	 * @param {string} libraryIdent     The identifier of the library/version
-	 * @return {Promise} to list libraries
-	 */
-	notifyStart(promise, libraryIdent) {
-		return promise;
-	}
-
-	notifyComplete(promise, result, error) {
-		if (error) {
-			throw error;
-		}
-	}
-}
-
-function libraryDelete(name) {
-	const apiClient = fetchApiClient();
-	const command = new LibraryDeleteCommand();
-	return new DevLibraryDeleteCommandSite(apiClient, name).run(command, {});
-}
-
+import {libraryDelete} from './library.spec';
 
 projectSelectedScope((context) => {
 
@@ -113,7 +71,7 @@ projectSelectedScope((context) => {
 
 			it('can contribute the library', () => {
 				const version = '0.0.1';
-				copySync(path.join(resourcesDirectory(), 'libraries', 'publish', 'valid', version), context.projectDir);
+				copySync(path.join(resourcesDirectory(), 'libraries', 'contribute', 'valid', version), context.projectDir);
 				const module = require('../lib/library_contribute');
 				return runContribute(() => {
 					return expectNotification(module.notifyLibraryValidating(context.projectDir + '/'));
@@ -124,13 +82,13 @@ projectSelectedScope((context) => {
 
 			it('cannot recontribute the same version of the library', () => {
 				const version = '0.0.1';
-				copySync(path.join(resourcesDirectory(), 'libraries', 'publish', 'valid', version), context.projectDir);
+				copySync(path.join(resourcesDirectory(), 'libraries', 'contribute', 'valid', version), context.projectDir);
 				return expect(runContribute(() => {})).to.eventually.be.rejectedWith('This version already exists. Version must be greater than 0.0.1');
 			});
 
 			it('can contribute the library with a new version', () => {
 				const version = '0.0.2';
-				copySync(path.join(resourcesDirectory(), 'libraries', 'publish', 'valid', version), context.projectDir);
+				copySync(path.join(resourcesDirectory(), 'libraries', 'contribute', 'valid', version), context.projectDir);
 				const module = require('../lib/library_contribute');
 				return runContribute(() => {
 					return expectNotification(module.notifyLibraryValidating(context.projectDir + '/'));

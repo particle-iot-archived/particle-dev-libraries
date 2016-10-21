@@ -30,7 +30,7 @@
     "loophole": "^1.1.0",
     "particle-commands": "0.2.1",
     "particle-dev-views": "git://github.com/spark/particle-dev-views.git#v0.1.0",
-    "particle-library-manager": "0.0.5",
+    "particle-library-manager": "0.1.0",
     "when": "^3.7.7"
   },
   "readme": "# Libraries for Particle Dev\n",
