@@ -40,9 +40,11 @@ export function findNotification(expected, shouldExist=true, notifications) {
 	if (shouldExist) {
 		expect(notifications.length).to.be.greaterThan(0, 'no notifications visible, expected at least one');
 	}
-	let matched = false;
+	let matched = [];
 	for (let idx in notifications) {
-		matched = matched || notificationsSame(notifications[idx], expected);
+		if (notificationsSame(notifications[idx], expected)) {
+			matched.push(notifications[idx]);
+		}
 	}
 	return matched;
 }
@@ -54,14 +56,18 @@ export function findNotification(expected, shouldExist=true, notifications) {
  */
 export function expectNotification(expected, shouldExist=true) {
 	const notifications = atom.notifications.getNotifications();
+
 	const matched = findNotification(expected, shouldExist, notifications);
-	if (matched!==shouldExist) {
-		console.log(notifications);
+	const exists = matched.length > 0;
+	if (exists !== shouldExist) {
+		console.log(notifications, matched, expected);
 		if (shouldExist) {
-			expect(notifications[0].message).to.be.deep.equal(expected.message);
+			expect(exists).to.be.equal(shouldExist, `expected notification to exist: ${expected.message}`);
 		} else {
-			expect(matched).to.be.equal(shouldExist, `expected notification to not exist: ${expected.message}`);
+			expect(exists).to.be.equal(shouldExist, `expected notification to not exist: ${expected.message}`);
 		}
+	} else {
+		expect(matched[0].message).to.be.deep.equal(expected.message);
 	}
 }
 
