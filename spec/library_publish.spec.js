@@ -39,7 +39,7 @@ projectSelectedScope((context) => {
                     console.log('CONTIRBUTE');
                     return runPublish(() => {
                         console.log('PUBLISH');
-                        return expectNotification(module.notifyLibraryPublished({name:libraryName+'z', metadata: {version}}));
+                        return expectNotification(module.notifyLibraryPublished({name:libraryName, metadata: {version}}));
                     });
                 });
             });
