@@ -80,12 +80,6 @@ projectSelectedScope((context) => {
 				});
 			});
 
-			it('cannot recontribute the same version of the library', () => {
-				const version = '0.0.1';
-				copySync(path.join(resourcesDirectory(), 'libraries', 'contribute', 'valid', version), context.projectDir);
-				return expect(runContribute(() => {})).to.eventually.be.rejectedWith('This version already exists. Version must be greater than 0.0.1');
-			});
-
 			it('can contribute the library with a new version', () => {
 				const version = '0.0.2';
 				copySync(path.join(resourcesDirectory(), 'libraries', 'contribute', 'valid', version), context.projectDir);
