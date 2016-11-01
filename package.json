@@ -45,9 +45,9 @@
     "test:unit": "mocha test/ -R spec --compilers js:babel-register",
     "test:all": "npm run test:unit && npm run test:integration",
     "test": "npm run test:all",
-    "prepublish": "echo",
-    "preversion": "npm run lint && npm run test && npm run prepublish",
-    "version": "npm run update-changelog",
+    "_prepublish": "echo",
+    "_preversion": "npm run lint && npm run test && npm run prepublish",
+    "_version": "npm run update-changelog",
     "update-changelog": "VERSION=`node -p -e \"require('./package.json').version\"` bash -c 'read -p \"Update CHANGELOG.md for version $VERSION and press ENTER when done.\"' && git add CHANGELOG.md"
   },
   "atomTestRunner": "./spec/runner.js",
