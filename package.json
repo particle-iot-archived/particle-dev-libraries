@@ -16,6 +16,11 @@
       "versions": {
         "^0.0.1": "consumeProfiles"
       }
+    },
+    "tool-bar": {
+      "versions": {
+        "^0 || ^1": "consumeToolBar"
+      }
     }
   },
   "package-deps": [
