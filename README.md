@@ -3,6 +3,7 @@
 ![Library add command](https://raw.githubusercontent.com/spark/particle-dev-libraries/master/resources/library_add.gif)
 
 [![Build Status](https://travis-ci.org/spark/particle-dev-libraries.svg?branch=master)](https://travis-ci.org/spark/particle-dev-libraries)
+[![Dependency Status](https://dependencyci.com/github/spark/particle-dev-libraries/badge)](https://dependencyci.com/github/spark/particle-dev-libraries)
 
 This package provides library-related commands to Particle Dev.
 

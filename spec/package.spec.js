@@ -2,7 +2,6 @@
 
 import {profileManager} from '../lib/index';
 import chai, {expect} from 'chai';
-import {onDidSetProfileManager} from '../lib/index';
 import {packageName} from '../lib/util/package-helper';
 chai.use(require('chai-as-promised'));
 
@@ -117,29 +116,8 @@ export function packageTestScope(tests, context={}) {
  * Package-level tests.
  */
 packageTestScope((context) => {
-
-
 	it('can be loaded', function doit() {
 		this.timeout(30000);
 		activatePackage();
 	});
-
-	it('the profiles manager is provided', function doit(done) {
-		this.timeout(30000);
-
-		// the profile manager is loaded asynchronously
-		let dispose = onDidSetProfileManager(() => {
-			if (dispose) {
-				const pm = profileManager();
-				expect(pm).to.be.ok;
-				dispose.dispose();
-				dispose = null;
-				done();
-			}
-		});
-		atom.packages.activatePackage('particle-dev-profiles');
-		activatePackage();
-	});
 });
-
-

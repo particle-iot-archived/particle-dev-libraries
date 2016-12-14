@@ -19,10 +19,11 @@ describe('unit tests', () => {
 			const libraryInitCommand = sinon.stub();
 			const atom = { commands: { add: sinon.stub() }, project: { getDirectories: sinon.stub().returns([])}};
 			const disposable = { dispose: sinon.stub() };
+			const toolBar = { addButton: sinon.stub() };
 			const namespace = 'particle-dev-libraries';
 			atom.commands.add.returns(disposable);
 
-			registerCommands(atom, {libraryAddCommand, libraryMigrateCommand, libraryInitCommand});
+			registerCommands(atom, toolBar, {libraryAddCommand, libraryMigrateCommand, libraryInitCommand});
 			const commands = atom.commands.add.firstCall.args[1];
 
 			it('calls the atom.command.add method', () => {
