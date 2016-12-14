@@ -1,0 +1,40 @@
+@import "octicon-mixins";
+@import "ui-variables";
+@import "variables";
+
+.library-card {
+	padding: @component-padding*1.5;
+	margin-bottom: @component-padding;
+	margin-right: 40px;
+	list-style-type: none;
+	font-size: 1.2em;
+	border-radius: @component-border-radius*2;
+	border: 1px solid @base-border-color;
+	background-color: @package-card-background-color;
+	overflow: hidden;
+	cursor: pointer;
+	-webkit-user-select: none;
+
+	&:hover {
+		background-color: contrast(@package-card-background-color, darken(@package-card-background-color, 2%), lighten(@package-card-background-color, 2%));
+	}
+	&:active {
+		background-color: @package-card-background-color;
+	}
+
+	.card-name {
+		font-weight: 300;
+		margin: 0 0 .2em 0;
+		font-size: 1.2em;
+		line-height: 1.4;
+
+		.css-truncate-target {
+			color: $greenDark;
+		}
+	}
+
+	.library-name {
+		font-weight: bolder;
+		color: @text-color-highlight;
+	}
+}
