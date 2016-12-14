@@ -12,6 +12,11 @@
     "atom": "^1.0.0"
   },
   "consumedServices": {
+    "particle-dev": {
+      "versions": {
+        "^0.0.1": "consumeCore"
+      }
+    },
     "particle-dev-profiles": {
       "versions": {
         "^0.0.1": "consumeProfiles"
@@ -24,7 +29,9 @@
     }
   },
   "package-deps": [
-    "particle-dev-profiles"
+    "particle-dev",
+    "particle-dev-profiles",
+    "tool-bar"
   ],
   "dependencies": {
     "atom-package-deps": "^4.2.0",
