@@ -2,18 +2,17 @@
 
 import path from 'path';
 import {copySync} from 'fs-extra';
-import {expect} from 'chai';
 import {expectNotification} from './package.spec';
 import {projectSelectedScope} from './project.spec';
 import {runCommand} from './commands.spec';
 import {libraryDelete} from './library.spec';
 
 projectSelectedScope((context) => {
-	function expectValidationErrorNotification(msg) {
-		const module = require('../lib/library_contribute');
-		const expected = module.notifyValidationError(msg);
-		expectNotification(expected);
-	}
+	// function expectValidationErrorNotification(msg) {
+	// 	const module = require('../lib/library_contribute');
+	// 	const expected = module.notifyValidationError(msg);
+	// 	expectNotification(expected);
+	// }
 
 	function runPublish(then) {
 		return runCommand('publish', then);

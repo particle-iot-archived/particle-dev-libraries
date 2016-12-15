@@ -1,6 +1,5 @@
 'use babel';
 
-import {profileManager} from '../lib/index';
 import chai, {expect} from 'chai';
 import {packageName} from '../lib/util/package-helper';
 chai.use(require('chai-as-promised'));
