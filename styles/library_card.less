@@ -36,4 +36,43 @@
 		font-weight: bolder;
 		color: @text-color-highlight;
 	}
+
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		width: 100%;
+
+		.meta-user {
+			flex: 1 0 auto;
+			margin-top: @component-padding;
+			margin-right: @component-padding;
+
+			.author {
+				color: @text-color-subtle;
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+
+		.meta-controls {
+			.status-indicator {
+				padding: 0;
+				width: @component-padding/2;
+				min-width: 4px;
+				pointer-events: none;
+				transition: background .4s;
+				background: @background-color-success;
+				&.is-disabled {
+					background: @background-color-warning;
+				}
+			}
+
+			.btn-toolbar > .btn-group {
+				float: left;
+				margin: @component-padding/2 0 0 @component-padding/2;
+			}
+		}
+	}
 }
