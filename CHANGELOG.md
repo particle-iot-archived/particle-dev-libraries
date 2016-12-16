@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.4 - 2016-12-16
+### Added
+ - view library sources
+ - add to current project
+
 ## 0.2.3 - 2016-12-14
 ### Added
  - libraries search
