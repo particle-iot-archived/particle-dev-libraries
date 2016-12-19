@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.5 - 2016-12-19
+### Added
+ - add Verified icon
+ - add Private library icon
+ - fix bug making viewing library sources impossible
+
 ## 0.2.4 - 2016-12-16
 ### Added
  - view library sources
