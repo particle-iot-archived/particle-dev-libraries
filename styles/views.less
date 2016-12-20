@@ -1,5 +1,66 @@
 @import "variables";
 
+
+.particle-validating-editor .text-error::after {
+  // zero-width space - forces this element to display always
+  content: "\200B";
+}
+
+.project-init-view .@{package-name} {
+
+  margin: 1em;
+
+  h2 {
+    font-weight: bold;
+    font-size: 150%;
+    color: #4182c4;
+    margin-bottom: 2em;
+    padding-bottom: 0.25em;
+    //border-bottom: grey 1px solid;
+  }
+
+
+  .body {
+    min-height: 20em;
+  }
+
+  .step2 {
+    font-size: larger;
+
+    .name, .directory {
+      font-weight: bold;
+      color:lightgray;
+    }
+
+    label {
+      display: inline-block;
+      min-width: 130px;
+    }
+
+    .success {
+      font-weight:bold;
+      color: white;
+      font-size:larger;
+    }
+  }
+
+  .btn {
+    margin-right: 10px;
+  }
+
+  .select-project-directory {
+    .particle-validating-editor {
+      width:80%;
+      display: inline-block;
+    }
+
+    .btn {
+      margin-left: 10px;
+      vertical-align: top;
+    }
+  }
+}
+
 #library-init-view.@{package-name} {
   .btn {
     margin-right: 10px;
