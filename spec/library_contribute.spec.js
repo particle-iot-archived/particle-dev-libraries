@@ -2,7 +2,6 @@
 
 import path from 'path';
 import {copySync} from 'fs-extra';
-import {expect} from 'chai';
 import {expectNotification} from './package.spec';
 import {projectSelectedScope} from './project.spec';
 import {runCommand} from './commands.spec';
