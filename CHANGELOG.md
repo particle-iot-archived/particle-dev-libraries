@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.8 - 2016-12-21
+### Fixed
+ - disable add library button instead of hiding it
+ - move private icon to the right
+ - refresh libraries when showing panel again
+ - add notification if library upload failed
+
+## 0.2.7 - 2016-12-21
+### Fixed
+ - project initialization fixes
+
+## 0.2.6 - 2016-12-20
+### Added
+ - project init command
+
 ## 0.2.5 - 2016-12-19
 ### Added
  - add Verified icon
