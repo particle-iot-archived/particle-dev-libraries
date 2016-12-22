@@ -38,16 +38,26 @@
 	}
 
 	.library-verified {
-		color: @text-color-info;
+		background-color: @text-color-info;
 		margin-left: @component-padding;
-
-		&::before {
-			font-size: 1.2em;
-		}
+		-webkit-mask: url(atom://particle-dev-libraries/resources/verified.svg) center / contain no-repeat;
+		display: inline-block;
+		width: 14px;
+		height: 14px;
 	}
 
 	.library-private {
 		margin-left: @component-padding;
+		vertical-align: text-bottom;
+
+		&::before {
+			font-size: 14px;
+		}
+	}
+
+	.library-official {
+		margin-left: @component-padding;
+		width: 16px;
 	}
 
 	.meta {
