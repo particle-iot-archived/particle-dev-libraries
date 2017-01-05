@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.12 - 2017-01-05
+### Fixed
+ - allow adding libraries to other libraries
+
+## 0.2.11 - 2016-12-22
+### Fixed
+ - remove migrate, upload and publish icons
+
+## 0.2.10 - 2016-12-22
+### Fixed
+- use community libraries sort order
+
+## 0.2.9 - 2016-12-22
+### Fixed
+ - library icons
+ - make disabled button gray
+ - only fetch libraries once at the time
+
 ## 0.2.8 - 2016-12-21
 ### Fixed
  - disable add library button instead of hiding it
