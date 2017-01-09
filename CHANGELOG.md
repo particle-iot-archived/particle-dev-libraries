@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.14 - 2017-01-09
+### Added
+ - ability to copy a library
+
 ## 0.2.13 - 2017-01-06
 ### Added
  - libraries pagination
