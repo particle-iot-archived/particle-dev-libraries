@@ -1,4 +1,5 @@
-@import "variables";
+@import 'variables';
+@import 'ui-variables';
 
 .project-init-view .@{package-name} {
 	margin: 1em;
@@ -6,14 +7,10 @@
 	h2 {
 		font-weight: bold;
 		font-size: 150%;
-		color: #4182c4;
+		color: @text-color-selected;
 		margin-bottom: 2em;
 		padding-bottom: 0.25em;
 		//border-bottom: grey 1px solid;
-	}
-
-	.body {
-		min-height: 20em;
 	}
 
 	.step2 {
