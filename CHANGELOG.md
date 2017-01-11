@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.17 - 2017-01-11
+### Added
+ - listing library versions
+
 ## 0.2.16 - 2017-01-10
 ### Added
  - library management panel

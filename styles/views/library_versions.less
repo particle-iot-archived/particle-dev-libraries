@@ -1,0 +1,45 @@
+@import "ui-variables";
+
+.versions {
+	progress {
+		width: 100%;
+	}
+	
+	table {
+		width: 100%;
+		table-layout: initial;
+	}
+
+	th {
+		padding: @component-padding - 2px @component-padding;
+		padding-left: 0;
+	}
+
+	td {
+		height: @component-line-height;
+	}
+
+	td, th {
+		padding-left: 1%;
+		padding-right: 1%;
+		white-space: nowrap;
+		overflow: hidden;
+		border-top: 1px solid @base-border-color;
+	}
+
+	td:nth-child(1) {
+		width: (40% - 2%);
+	}
+
+	td:nth-child(2) {
+		width: (20% - 2%);
+	}
+
+	td:nth-child(4) {
+		width: (10% - 2%);
+	}
+
+	button {
+		margin-left: @component-padding;
+	}
+}
