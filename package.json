@@ -56,6 +56,7 @@
   "homepage": "https://github.com/spark/particle-dev-libraries#readme",
   "scripts": {
     "lint": "eslint -f unix lib spec",
+    "lint:fix": "eslint --fix -f unix lib spec",
     "test:integration": "apm test",
     "test:unit": "mocha test/ -R spec --compilers js:babel-register",
     "test:all": "npm run test:unit && npm run test:integration",

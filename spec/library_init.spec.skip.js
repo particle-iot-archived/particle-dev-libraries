@@ -1,11 +1,11 @@
 'use babel';
 
-import {projectSelectedScope, projectNotSelectedScope} from './project.spec';
-import {expect} from 'chai';
+import { projectSelectedScope, projectNotSelectedScope } from './project.spec';
+import { expect } from 'chai';
 import path from 'path';
-import {getProjectDirectory, setProjectDirectory} from '../lib/util/package-helper';
-import {runCommand} from './commands.spec';
-import {expectNoDirectoryNotificationIsShown} from './project.spec';
+import { getProjectDirectory, setProjectDirectory } from '../lib/util/package-helper';
+import { runCommand } from './commands.spec';
+import { expectNoDirectoryNotificationIsShown } from './project.spec';
 import temp from 'temp';
 
 
@@ -248,7 +248,7 @@ projectNotSelectedScope((context) => {
 
 		it('can initialize a new library in an empty folder', () => {
 			const libSpec = { name: 'test', version: '1.2.3', directory, author: 'me' };
-			const {libraryPerformInit} = require('../lib/library_init');
+			const { libraryPerformInit } = require('../lib/library_init');
 			return libraryPerformInit(atom, libSpec).then(() => {
 				//expect(fs.existsSync('library.properties')).to.be.true;
 			});

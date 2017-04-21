@@ -1,7 +1,7 @@
 'use babel';
 
-import {fetchApiClient} from '../lib/library';
-const {LibraryDeleteCommandSite, LibraryDeleteCommand} = require('../lib/cli');
+import { fetchApiClient } from '../lib/library';
+const { LibraryDeleteCommandSite, LibraryDeleteCommand } = require('../lib/cli');
 
 export class DevLibraryDeleteCommandSite extends LibraryDeleteCommandSite {
 	constructor(apiClient, name) {

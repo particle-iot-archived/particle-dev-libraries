@@ -1,11 +1,11 @@
 'use babel';
 
-import {expectNoDirectoryNotificationIsShown} from './project.spec';
-import {projectNotSelectedScope} from './project.spec';
-import {projectSelectedScope} from './project.spec';
-import {expect} from 'chai';
+import { expectNoDirectoryNotificationIsShown } from './project.spec';
+import { projectNotSelectedScope } from './project.spec';
+import { projectSelectedScope } from './project.spec';
+import { expect } from 'chai';
 import sinon from 'sinon';
-import {runCommand} from './commands.spec';
+import { runCommand } from './commands.spec';
 
 projectSelectedScope((context) => {
 
