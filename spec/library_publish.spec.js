@@ -1,11 +1,11 @@
 'use babel';
 
 import path from 'path';
-import {copySync} from 'fs-extra';
-import {expectNotification} from './package.spec';
-import {projectSelectedScope} from './project.spec';
-import {runCommand} from './commands.spec';
-import {libraryDelete} from './library.spec';
+import { copySync } from 'fs-extra';
+import { expectNotification } from './package.spec';
+import { projectSelectedScope } from './project.spec';
+import { runCommand } from './commands.spec';
+import { libraryDelete } from './library.spec';
 
 projectSelectedScope((context) => {
 	// function expectValidationErrorNotification(msg) {
@@ -38,7 +38,7 @@ projectSelectedScope((context) => {
 					console.log('CONTIRBUTE');
 					return runPublish(() => {
 						console.log('PUBLISH');
-						return expectNotification(module.notifyLibraryPublished({name:libraryName, metadata: {version}}));
+						return expectNotification(module.notifyLibraryPublished({ name:libraryName, metadata: { version } }));
 					});
 				});
 			});

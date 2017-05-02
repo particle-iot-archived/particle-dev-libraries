@@ -22,6 +22,7 @@
     "atom": true
   },
   "rules": {
-    "no-var": 2
+    "no-var": 2,
+    "no-console": 0
   }
 }

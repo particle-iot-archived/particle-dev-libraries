@@ -1,10 +1,10 @@
 'use babel';
 
-import {activatePackage, deactivatePackage} from './package.spec';
-import {packageTestScope} from './package.spec';
-import {setCommandResultCallback} from '../lib/library';
-import {packageName} from '../lib/util/package-helper';
-import {getLastRunCommandPromise} from '../lib/library';
+import { activatePackage, deactivatePackage } from './package.spec';
+import { packageTestScope } from './package.spec';
+import { setCommandResultCallback } from '../lib/library';
+import { packageName } from '../lib/util/package-helper';
+import { getLastRunCommandPromise } from '../lib/library';
 
 
 export function closeNotifications() {

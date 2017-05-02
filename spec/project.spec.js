@@ -1,8 +1,8 @@
 'use babel';
 
-import {setCommandResultCallback} from '../lib/library';
-import {expectNotification} from './package.spec';
-import {commandTestScope} from './commands.spec';
+import { setCommandResultCallback } from '../lib/library';
+import { expectNotification } from './package.spec';
+import { commandTestScope } from './commands.spec';
 import temp from 'temp';
 
 export function projectSelectedScope(tests, context={}) {

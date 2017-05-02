@@ -1,7 +1,7 @@
 'use babel';
 
-import {fetchPackageName} from '../../lib/util/package-helper';
-import {expect} from 'chai';
+import { fetchPackageName } from '../../lib/util/package-helper';
+import { expect } from 'chai';
 import path from 'path';
 
 describe('package-helper', () => {

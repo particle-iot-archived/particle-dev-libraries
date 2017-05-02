@@ -1,12 +1,12 @@
 'use babel';
 
-import {expect} from 'chai';
-import {copySync} from 'fs-extra';
-import {expectNotification} from './package.spec';
-import {projectSelectedScope} from './project.spec';
-import {runCommand} from './commands.spec';
-import {expectNoDirectoryNotificationIsShown} from './project.spec';
-import {projectNotSelectedScope} from './project.spec';
+import { expect } from 'chai';
+import { copySync } from 'fs-extra';
+import { expectNotification } from './package.spec';
+import { projectSelectedScope } from './project.spec';
+import { runCommand } from './commands.spec';
+import { expectNoDirectoryNotificationIsShown } from './project.spec';
+import { projectNotSelectedScope } from './project.spec';
 
 
 function runMigrate(then) {

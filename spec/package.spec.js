@@ -1,7 +1,7 @@
 'use babel';
 
-import chai, {expect} from 'chai';
-import {packageName} from '../lib/util/package-helper';
+import chai, { expect } from 'chai';
+import { packageName } from '../lib/util/package-helper';
 chai.use(require('chai-as-promised'));
 
 
@@ -16,7 +16,7 @@ chai.use(require('chai-as-promised'));
  */
 
 export function buildGlobalAtom() {
-	global.atom = global.buildAtomEnvironment({configDirPath: process.env.ATOM_HOME});
+	global.atom = global.buildAtomEnvironment({ configDirPath: process.env.ATOM_HOME });
 }
 
 export function activatePackage() {
