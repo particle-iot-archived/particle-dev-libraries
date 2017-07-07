@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.19 - 2017-07-07
+### Fixed
+ - updated atom-package-deps to 4.6.0
+
 ## 0.2.18 - 2017-01-12
 ### Fixed
  - open created project in the same window
