@@ -1,7 +1,7 @@
 {
   "name": "particle-dev-libraries",
   "main": "./lib/index.js",
-  "version": "0.2.20",
+  "version": "0.2.21",
   "description": "Libraries for Particle Dev",
   "repository": {
     "type": "git",
