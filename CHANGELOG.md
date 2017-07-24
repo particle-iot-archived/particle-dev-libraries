@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.22 - 2017-07-24
+### Fixed
+ - Install dependencies without using git
+
+## 0.2.21 - 2017-07-13
+### Fixed
+ - Use particle-dev-profiles API 0.0.2
+
 ## 0.2.20 - 2017-07-13
 ### Fixed
  - use particle-dev-profiles api 0.0.2
