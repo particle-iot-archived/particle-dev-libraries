@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.22 - 2017-09-13
+### Fixed
+ - Use library button doesn't work if `project.properties` file is missing
+
 ## 0.2.21 - 2017-07-24
 ### Fixed
  - install dependencies without using git
