@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.24 - 2017-10-07
+### Fixed
+ - Failed to activate the package in the latest Atom
+
 ## 0.2.23 - 2017-09-22
 ### Fixed
  - Showing up bottom dock when viewing libraries

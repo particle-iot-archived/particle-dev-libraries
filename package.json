@@ -36,6 +36,7 @@
   "dependencies": {
     "atom-package-deps": "^4.6.0",
     "atom-space-pen-views": "^2.2.0",
+    "atom-ts-transpiler": "^1.2.3",
     "etch": "^0.8.0",
     "event-kit": "^2.1.0",
     "jquery": "^3.1.1",
@@ -87,5 +88,15 @@
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0",
     "temp": "^0.8.3"
-  }
+  },
+  "atomTranspilers": [
+    {
+      "transpiler": "atom-ts-transpiler",
+      "glob": "{!(node_modules)/**/,}*.ts?(x)",
+      "options": {
+        "compilerOptions": {},
+        "verbose": false
+      }
+    }
+  ]
 }
