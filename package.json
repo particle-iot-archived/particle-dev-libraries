@@ -49,6 +49,7 @@
     "particle-dev-views": "https://github.com/spark/particle-dev-views/archive/v0.1.0.tar.gz",
     "particle-library-manager": "0.1.11",
     "semver": "^5.3.0",
+    "typescript": "^2.5.3",
     "when": "^3.7.7"
   },
   "readme": "# Libraries for Particle Dev\n",
@@ -96,12 +97,12 @@
       "transpiler": "atom-ts-transpiler",
       "glob": "{!(node_modules)/**/,}*.ts?(x)",
       "options": {
-        "compilerOptions": {},
+        "cacheKeyFiles": [ "lib/yeoman/tsconfig.json" ],
         "verbose": false
       }
     },
     {
-      "glob": "**/*.js",
+      "glob": "{!(node_modules)/**/,}*.js",
       "transpiler": "atom-babel6-transpiler"
     }
   ]
