@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.2.26 - 2017-10-07
+### Fixed
+ - Added missing dependency
+
 ## 0.2.25 - 2017-10-07
 ### Fixed
  - Added Babel transpiler

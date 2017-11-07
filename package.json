@@ -34,6 +34,7 @@
     "tool-bar"
   ],
   "dependencies": {
+    "atom-babel6-transpiler": "^1.1.2",
     "atom-package-deps": "^4.6.0",
     "atom-space-pen-views": "^2.2.0",
     "atom-ts-transpiler": "^1.2.3",
