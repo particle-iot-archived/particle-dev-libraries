@@ -1,7 +1,7 @@
 {
   "name": "particle-dev-libraries",
   "main": "./lib/index.js",
-  "version": "0.2.27",
+  "version": "0.2.28",
   "description": "Libraries for Particle Dev",
   "repository": {
     "type": "git",
@@ -97,7 +97,9 @@
       "transpiler": "atom-ts-transpiler",
       "glob": "{!(node_modules)/**/,}*.ts?(x)",
       "options": {
-        "cacheKeyFiles": [ "lib/yeoman/tsconfig.json" ],
+        "cacheKeyFiles": [
+          "lib/yeoman/tsconfig.json"
+        ],
         "verbose": false
       }
     },
