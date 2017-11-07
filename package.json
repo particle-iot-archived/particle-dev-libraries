@@ -97,6 +97,10 @@
         "compilerOptions": {},
         "verbose": false
       }
+    },
+    {
+      "glob": "**/*.js",
+      "transpiler": "atom-babel6-transpiler"
     }
   ]
 }
