@@ -5,7 +5,7 @@
   "description": "Libraries for Particle Dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spark/particle-dev-libraries.git"
+    "url": "https://github.com/spark/particle-dev-libraries.git"
   },
   "license": "Apache-2.0",
   "engines": {
